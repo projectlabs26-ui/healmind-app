@@ -1,0 +1,227 @@
+/// Indonesian translations for all user-facing strings.
+library;
+
+class AppStringsId {
+  static const Map<String, String> map = {
+    // App
+    'appName': 'HealMind',
+    'tagline': 'Teman kesehatan mental harianmu',
+
+    // Navigation
+    'navHome': 'Beranda',
+    'navJournal': 'Jurnal',
+    'navBreathe': 'Napas',
+    'navCBT': 'CBT',
+    'navProfile': 'Profil',
+
+    // Home
+    'greetingMorning': 'Selamat pagi',
+    'greetingAfternoon': 'Selamat siang',
+    'greetingEvening': 'Selamat malam',
+    'howAreYou': 'Bagaimana perasaanmu hari ini?',
+    'noMoodToday': 'Belum check-in',
+    'tapToCheckIn': 'Ketuk untuk check-in',
+    'streak': 'Hari berturut',
+    'todayAffirmation': 'Afirmasi Hari Ini',
+
+    // Mood
+    'moodGreat': 'Senang',
+    'moodOkay': 'Biasa',
+    'moodSad': 'Sedih',
+    'moodAngry': 'Marah',
+    'moodTired': 'Lelah',
+    'moodNoteHint': 'Tambah catatan (opsional)...',
+    'saveMood': 'Simpan',
+    'moodSaved': 'Mood tersimpan!',
+    'alreadyCheckedIn': 'Kamu sudah check-in hari ini.',
+
+    // Journal
+    'journalTitle': 'Jurnal',
+    'newEntry': 'Entri Baru',
+    'editEntry': 'Edit Entri',
+    'titleHint': 'Judul',
+    'contentHint': 'Tulis pikiranmu...',
+    'gratitudeTitle': 'Hari ini aku bersyukur untuk',
+    'gratitude1': '1. Hal yang aku syukuri...',
+    'gratitude2': '2. Hal yang aku syukuri...',
+    'gratitude3': '3. Hal yang aku syukuri...',
+    'noEntries': 'Belum ada entri jurnal.\nMulai menulis hari ini!',
+    'saveEntry': 'Simpan Entri',
+    'deleteEntry': 'Hapus Entri',
+    'deleteConfirm': 'Hapus entri ini?',
+    'cancel': 'Batal',
+    'delete': 'Hapus',
+
+    // Affirmations
+    'affirmations': 'Afirmasi',
+    'noAffirmations': 'Tidak ada afirmasi',
+    'shareAffirmation': 'Bagikan afirmasi ini',
+
+    // Mood Chart
+    'moodChart': 'Riwayat Mood',
+    'weekly': 'Minggu',
+    'monthly': 'Bulan',
+    'noMoodData': 'Belum ada data mood.\nCheck-in setiap hari untuk melihat grafik!',
+
+    // Settings
+    'settings': 'Pengaturan',
+    'reminderSettings': 'Pengingat',
+    'reminderDesc': 'Pengingat jurnal harian',
+    'reminderTime': 'Waktu pengingat',
+    'darkMode': 'Mode Gelap',
+    'dataManagement': 'Manajemen Data',
+    'exportData': 'Ekspor Data',
+    'deleteAllData': 'Hapus Semua Data',
+    'deleteAllConfirm': 'Ini akan menghapus permanen semua entri jurnal, data mood, dan pengaturan. Tidak bisa dibatalkan.',
+    'about': 'Tentang',
+    'privacyPolicy': 'Kebijakan Privasi',
+    'version': 'Versi 1.0.0',
+
+    // Breathing
+    'breathing': 'Pernapasan',
+    'startSession': 'Mulai Sesi',
+    'selectPattern': 'Pilih Pola',
+    'selectDuration': 'Durasi',
+    'inhale': 'Tarik Napas',
+    'hold': 'Tahan',
+    'exhale': 'Buang Napas',
+    'sessionComplete': 'Sesi Selesai!',
+    'sessionCompleteDesc': 'Kerja bagus meluangkan waktu untuk diri sendiri.',
+    'cyclesCompleted': 'Siklus selesai',
+    'totalTime': 'Total waktu',
+    'done': 'Selesai',
+    'pause': 'Jeda',
+    'resume': 'Lanjutkan',
+    'endSession': 'Akhiri Sesi',
+    'confirmEndSession': 'Akhiri sesi pernapasan ini lebih awal?',
+    'panicButton': 'Panik',
+    'panicButtonDesc': 'Pernapasan cepat 1 menit',
+    'ambientSound': 'Suara Ambient',
+    'noSound': 'Tidak Ada',
+    'rain': 'Hujan',
+    'ocean': 'Laut',
+    'forest': 'Hutan',
+    'breathingHistory': 'Riwayat Pernapasan',
+    'noBreathingSessions': 'Belum ada sesi pernapasan.\nMulai sesi pertamamu!',
+    'minAbbr': 'mnt',
+    'comingSoon': 'Segera Hadir',
+
+    // CBT
+    'cbt': 'Toolkit CBT',
+    'cbtComingSoon': 'Alat Cognitive Behavioral Therapy akan tersedia di update mendatang.',
+    'thoughtCatcher': 'Penangkap Pikiran',
+    'catchYourThought': 'Pikiran negatif apa yang mengganggumu?',
+    'thoughtHint': 'Tulis pikiran di sini...',
+    'identifyDistortions': 'Identifikasi Distorsi',
+    'distortionsPrompt': 'Distorsi kognitif mana yang berlaku? (pilih semua)',
+    'rateIntensity': 'Nilai Intensitas',
+    'intensityPrompt': 'Seberapa kuat kamu merasakan emosi ini?',
+    'reframe': 'Reframe',
+    'reframePrompt': 'Tulis pikiran alternatif yang seimbang dan realistis:',
+    'reframeHint': 'Apa cara yang lebih baik dan seimbang untuk memikirkan ini?',
+    'next': 'Lanjut',
+    'back': 'Kembali',
+    'saveCBT': 'Simpan Refleksi',
+    'cbtHistory': 'Riwayat CBT',
+    'noCBTEntries': 'Belum ada refleksi CBT.\nMulai reframe pikiranmu!',
+    'cbtTip': 'Tips CBT',
+    'thoughtLabel': 'Pikiran',
+    'reframedLabel': 'Reframed',
+    'intensity': 'Intensitas',
+    'distortions': 'Distorsi',
+    'step': 'Langkah',
+    'of': 'dari',
+    'viewEntry': 'Lihat Entri',
+
+    // Notifications
+    'reminderTitle': 'Waktunya jurnal',
+    'reminderBody': 'Bagaimana harimu? Luangkan waktu untuk menulis jurnal 🌙',
+
+    // General
+    'ok': 'OK',
+    'yes': 'Ya',
+    'no': 'Tidak',
+    'confirm': 'Konfirmasi',
+    'error': 'Terjadi kesalahan',
+    'retry': 'Coba Lagi',
+    'allDataDeleted': 'Semua data telah dihapus.',
+
+    // Calm Sounds
+    'calmSounds': 'Suara Tenang',
+    'sleepTimer': 'Timer Tidur',
+    'off': 'Mati',
+    'minutes': 'menit',
+    'stopSound': 'Hentikan Suara',
+
+    // Onboarding
+    'onboardingSkip': 'Lewati',
+    'onboardingNext': 'Lanjut',
+    'onboardingGetStarted': 'Mulai',
+    'onboardingTitle1': 'Selamat Datang di HealMind',
+    'onboardingDesc1': 'Teman kesehatan mental harianmu. Lacak mood, tulis jurnal, dan bangun kebiasaan sehat.',
+    'onboardingTitle2': 'Jurnal & Lacak Mood',
+    'onboardingDesc2': 'Tulis pikiranmu dan lacak mood setiap hari. Lihat pola emosimu dari waktu ke waktu.',
+    'onboardingTitle3': 'Bernapas & Relaksasi',
+    'onboardingDesc3': 'Latihan pernapasan terpandu, suara menenangkan, dan alat CBT untuk mengelola stres dan kecemasan.',
+    'quickActions': 'Aksi Cepat',
+    'checkIn': 'Check In',
+    'panicBreathing': 'Napas',
+    'nextAffirmation': 'Afirmasi berikutnya',
+    'nextTip': 'Tips berikutnya',
+    'journalReminder': 'Pengingat Jurnal',
+    'thankYou': 'Terima kasih! Rating akan tersedia di Play Store.',
+
+    // Rating
+    'rateTitle': 'Suka HealMind?',
+    'rateMessage': 'Jika kamu merasa aplikasi ini membantu, beri kami rating ya!',
+    'rateNow': 'Beri Rating',
+    'rateLater': 'Nanti',
+
+    // Settings tambahan
+    'exportPdf': 'Ekspor PDF',
+    'exportPdfDesc': 'Bagikan jurnal & ringkasan mood sebagai PDF',
+    'rateHealMind': 'Beri Rating HealMind',
+    'rateHealMindDesc': 'Jika aplikasi ini membantu, beri rating ya!',
+    'language': 'Bahasa',
+    'languageDesc': 'Pilih bahasa / Choose language',
+    'languageEn': 'English',
+    'languageId': 'Bahasa Indonesia',
+    'appearance': 'Tampilan',
+    'colorTheme': 'Tema Warna',
+    'removeAds': 'Hapus Iklan',
+    'removeAdsTitle': 'Hapus Iklan 24 Jam',
+    'removeAdsDesc': 'Tonton video singkat untuk hapus semua iklan',
+    'premiumThemes': 'Tema Premium',
+    'unlockThemes': 'Buka 5 tema premium',
+    'unlockThemesDesc': 'Tonton video untuk buka semua tema premium',
+    'premiumThemesUnlocked': 'Tema premium terbuka!',
+    'locked': 'Terkunci',
+    'notifTitle': 'Waktunya jurnal',
+    'notifBody': 'Bagaimana harimu? Luangkan waktu untuk menulis jurnal 🌙',
+    'shareApp': 'Bagikan HealMind',
+    'shareAppDesc': 'Bagikan ke teman yang butuh dukungan kesehatan mental',
+
+    // Breathe screen
+    'guidedBreathing': 'Pernapasan Terpandu',
+    'breatheSubtitle': 'Luangkan waktu untuk bernapas dan temukan ketenangan',
+    'calmSoundsDesc': 'Suara Tenang — Hujan, Laut, Hutan',
+    'yourStats': 'Statistik Kamu',
+    'sessions': 'Sesi',
+    'totalMin': 'Total menit',
+    'cycles': 'Siklus',
+    'today': 'Hari ini',
+    'yesterday': 'Kemarin',
+
+    // CBT screen
+    'deleteReflection': 'Hapus Refleksi',
+    'deleteReflectionConfirm': 'Hapus refleksi CBT ini? Ini tidak bisa dibatalkan.',
+    'reflectionDeleted': 'Refleksi dihapus.',
+    'reframeSubtitle': 'Ubah pikiran negatif menjadi seimbang',
+    'startThoughtReframe': 'Mulai Reframe Pikiran',
+    'yourProgress': 'Progress Kamu',
+    'reflections': 'Refleksi',
+    'avgIntensity': 'Intensitas Rata',
+  };
+
+  static String get(String key) => map[key] ?? key;
+}
