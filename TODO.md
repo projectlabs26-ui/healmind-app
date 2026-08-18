@@ -1,6 +1,6 @@
 # HealMind — TODO List
 
-> Last updated: 17 August 2025
+> Last updated: 18 August 2026
 > Current phase: Phase 4 — Polish & Premium ✅
 > Total progress: 100%
 
@@ -134,3 +134,89 @@
 - [x] Deleted placeholder files (breathe_placeholder, cbt_placeholder)
 - [x] Removed unused strings.dart imports from all files
 - [ ] ⚠️ Banner ads may not show yet — unit AdMob baru butuh 24-48 jam untuk aktif.
+
+---
+
+## CI/CD & Release — GitHub Actions ✅
+
+### GitHub Repository
+- **URL**: https://github.com/projectlabs26-ui/healmind-app
+- **Branch**: `main`
+- **Akun GitHub**: `projectlabs26-ui`
+
+### Workflow: Build APK
+- **File**: `.github/workflows/build.yml`
+- **Trigger**: Push ke branch `main` atau manual (workflow_dispatch)
+- **Build**: Debug APK (`flutter build apk --debug`)
+- **Artifacts**: `healmind-debug-apk` (retention 7 hari)
+
+### Cara Build APK via GitHub Actions
+1. Push kode ke branch `main`
+2. Buka repo → tab **Actions**
+3. Tunggu workflow selesai (✅ hijau)
+4. Klik workflow → bagian **Artifacts**
+5. Download `healmind-debug-apk.zip`
+6. Extract → install APK ke HP
+
+### Release APK (Jika Diperlukan)
+#### Signing Key
+- Generate keystore:
+  ```bash
+  keytool -genkey -v -keystore healmind-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias healmind
+  ```
+- **Jangan commit keystore ke GitHub!**
+
+#### Setup Secrets di GitHub
+1. Buka repo → **Settings** → **Secrets and variables** → **Actions**
+2. Tambahkan secrets:
+   - `KEYSTORE_BASE64`: `base64 -i healmind-key.jks`
+   - `KEYSTORE_PASSWORD`: Password keystore
+   - `KEY_PASSWORD`: Password key
+
+#### Update Workflow untuk Release
+Edit `.github/workflows/build.yml`:
+```yaml
+- name: Decode keystore
+  run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > app/keystore.jks
+
+- name: Build APK (Release)
+  run: flutter build apk --release
+  env:
+    KEY_STORE_FILE: keystore.jks
+    KEY_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+    KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+    KEY_ALIAS: healmind
+```
+
+### Troubleshooting
+#### Error 403 Permission Denied
+- **Penyebab**: Credential cache Windows menyimpan akun GitHub lain
+- **Solusi**:
+  1. Hapus credential lama:
+     ```powershell
+     cmdkey /delete:git:https://github.com
+     ```
+  2. Set credential helper ke gh CLI:
+     ```bash
+     git config --global credential.helper "!'/c/Program Files/GitHub CLI/gh.exe' auth git-credential"
+     ```
+  3. Login ke gh CLI:
+     ```bash
+     gh auth login --web
+     ```
+
+### Build di Laptop 4GB RAM
+- ⚠️ Build lokal kemungkinan gagal karena kurang RAM
+- ✅ **Rekomendasi**: Gunakan GitHub Actions (cloud build)
+- Workflow gratis untuk public repo (2000 menit/bulan)
+
+### Checklist Release
+- [ ] Semua fitur Phase 1-4 sudah selesai ✅
+- [ ] `flutter analyze` — 0 issues ✅
+- [ ] Test di device fisik (Samsung Galaxy A07)
+- [ ] Ganti AdMob test IDs dengan production IDs
+- [ ] Generate signing key untuk release APK
+- [ ] Setup GitHub secrets untuk signing
+- [ ] Build release APK via GitHub Actions
+- [ ] Test install di minimal 3 HP berbeda
+- [ ] Upload ke Google Play Store (opsional)

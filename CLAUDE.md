@@ -147,3 +147,32 @@ Status: ✅ Complete
 | `lib/constants/` | Colors, strings, breathing patterns |
 | `RENCANA.md` | Full detailed plan |
 | `TODO.md` | Current task list |
+| `.github/workflows/build.yml` | GitHub Actions workflow |
+
+---
+
+## CI/CD — GitHub Actions
+
+### Repository
+- **GitHub**: https://github.com/projectlabs26-ui/healmind-app
+- **Branch**: `main`
+- **Akun**: `projectlabs26-ui`
+
+### Build APK
+Workflow otomatis build **Debug APK** saat push ke `main`:
+1. Push kode ke `main`
+2. Buka repo → tab **Actions**
+3. Tunggu workflow selesai (✅ hijau)
+4. Download APK dari **Artifacts**
+
+### Release APK (Production)
+Untuk release APK yang bisa diinstall tanpa warning:
+1. Generate signing key
+2. Setup GitHub secrets
+3. Update workflow untuk build release
+4. Lihat `TODO.md` → section **CI/CD & Release**
+
+### Troubleshooting Build
+- **4GB RAM laptop**: Build lokal kemungkinan gagal → pakai GitHub Actions
+- **403 Permission**: Hapus credential cache Windows, pakai `gh auth login`
+- Lihat `TODO.md` → section **Troubleshooting**
