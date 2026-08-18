@@ -4,6 +4,15 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch: # Manual trigger
+    inputs:
+      build_type:
+        description: 'Build type'
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+          - debug
+          - release
 
 jobs:
   build:
@@ -28,12 +37,41 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
+      # ====================
+      # DEBUG BUILD
+      # ====================
       - name: Build APK (Debug)
+        if: ${{ github.event.inputs.build_type == 'debug' || github.event_name == 'push' }}
         run: flutter build apk --debug
 
-      - name: Upload APK Artifact
+      - name: Upload Debug APK Artifact
+        if: ${{ github.event.inputs.build_type == 'debug' || github.event_name == 'push' }}
         uses: actions/upload-artifact@v4
         with:
           name: healmind-debug-apk
           path: build/app/outputs/flutter-apk/app-debug.apk
           retention-days: 7
+
+      # ====================
+      # RELEASE BUILD
+      # ====================
+      - name: Decode keystore
+        if: ${{ github.event.inputs.build_type == 'release' }}
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > app/keystore.jks
+
+      - name: Build APK (Release)
+        if: ${{ github.event.inputs.build_type == 'release' }}
+        run: flutter build apk --release
+        env:
+          KEY_STORE_FILE: keystore.jks
+          KEY_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: healmind
+
+      - name: Upload Release APK Artifact
+        if: ${{ github.event.inputs.build_type == 'release' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: healmind-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 30
