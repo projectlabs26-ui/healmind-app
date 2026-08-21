@@ -7,8 +7,10 @@ import '../models/user_settings.dart';
 import '../services/hive_service.dart';
 import '../services/notification_service.dart';
 import '../services/admob_service.dart';
+import '../services/consent_service.dart';
 import '../services/pdf_export_service.dart';
 import '../widgets/ad_banner_widget.dart';
+import 'privacy_policy_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   final ValueChanged<bool>? onDarkModeChanged;
@@ -352,6 +354,54 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const Divider(),
 
+          // ── Privacy & Ads ──
+          _SectionHeader(title: 'Privacy & Ads'),
+          SwitchListTile(
+            secondary: const Icon(Icons.person_search),
+            title: const Text('Personalized Ads'),
+            subtitle: Text(
+              ConsentService.personalizedAdsEnabled
+                  ? 'Ads based on your interests (recommended)'
+                  : 'Generic contextual ads only',
+            ),
+            value: ConsentService.personalizedAdsEnabled,
+            onChanged: (value) {
+              setState(() {
+                ConsentService.setPersonalizedAds(value);
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    value
+                        ? 'Personalized ads enabled'
+                        : 'Personalized ads disabled — showing contextual ads only',
+                  ),
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.privacy_tip_outlined),
+            title: Text(L10n.get('privacyPolicy')),
+            subtitle: const Text('How we handle your data'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const PrivacyPolicyScreen(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.gavel),
+            title: const Text('Do Not Sell My Info'),
+            subtitle: const Text('CCPA opt-out for California residents'),
+            onTap: _showCCPAOptOut,
+          ),
+          const Divider(),
+
           // ── About ──
           _SectionHeader(title: L10n.get('about')),
           ListTile(
@@ -365,16 +415,86 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: const Text('If you find this app helpful, please rate us!'),
             onTap: _rateApp,
           ),
-          ListTile(
-            leading: const Icon(Icons.privacy_tip_outlined),
-            title: Text(L10n.get('privacyPolicy')),
-            onTap: () {
-              // TODO: Show privacy policy
-            },
-          ),
         ],
       ),
       bottomNavigationBar: const AdBannerWidget(),
+    );
+  }
+
+  void _showCCPAOptOut() {
+    final isCurrentlyPersonalized = ConsentService.personalizedAdsEnabled;
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        icon: const Icon(Icons.gavel, size: 36, color: Colors.blue),
+        title: const Text('Do Not Sell My Info'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Under the California Consumer Privacy Act (CCPA), you have the right to opt out of the "sale" or "sharing" of your personal information for advertising purposes.',
+              style: TextStyle(fontSize: 14, height: 1.6, color: Colors.grey.shade700),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'When personalized ads are disabled:
+• Google AdMob shows generic/contextual ads
+• Your advertising ID is not used for targeting
+• Your device info is not used for ad personalization',
+              style: TextStyle(fontSize: 13, height: 1.6, color: Colors.grey.shade600),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.amber.shade50,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  const Text('⚠️', style: TextStyle(fontSize: 16)),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'The app is free and ads help support development. Disabling personalized ads may result in less relevant ads.',
+                      style: TextStyle(fontSize: 12, color: Colors.amber.shade900),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              setState(() {
+                ConsentService.setPersonalizedAds(!isCurrentlyPersonalized);
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    isCurrentlyPersonalized
+                        ? 'Personalized ads disabled (CCPA opt-out)'
+                        : 'Personalized ads re-enabled',
+                  ),
+                  duration: const Duration(seconds: 3),
+                ),
+              );
+            },
+            child: Text(
+              isCurrentlyPersonalized ? 'Opt Out' : 'Opt In',
+            ),
+          ),
+        ],
+      ),
     );
   }
 

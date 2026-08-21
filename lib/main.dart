@@ -4,6 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'services/hive_service.dart';
 import 'services/notification_service.dart';
 import 'services/admob_service.dart';
+import 'services/consent_service.dart';
 import 'app.dart';
 
 void main() async {
@@ -21,6 +22,9 @@ void main() async {
   );
   MobileAds.instance.updateRequestConfiguration(config);
   await MobileAds.instance.initialize();
+
+  // Request GDPR consent if needed (EEA/UK users)
+  await ConsentService.requestConsentIfNeeded();
 
   // Preload all ads
   AdMobService.loadInterstitial();

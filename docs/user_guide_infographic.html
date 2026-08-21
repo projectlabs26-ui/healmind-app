@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealMind — Panduan Pengguna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --lavender: #9B8EC4;
+            --lavender-light: #C4B8E8;
+            --lavender-dark: #7B6BA4;
+            --sage: #7BA098;
+            --sage-light: #A3C4BC;
+            --beige: #F5F0EB;
+            --beige-dark: #E8DDD4;
+            --dark: #1E2A2F;
+            --dark-surface: #2A3A42;
+            --text: #2D2D2D;
+            --text-light: #757575;
+            --mood-great: #4CAF50;
+            --mood-okay: #FFC107;
+            --mood-sad: #42A5F5;
+            --mood-angry: #EF5350;
+            --mood-tired: #9E9E9E;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0ebe5;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .infographic {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* ===== HERO HEADER ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--lavender) 0%, #B8A9D8 40%, var(--sage) 100%);
+            padding: 60px 40px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(255,255,255,0.1) 0%, transparent 40%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero-icon {
+            width: 90px;
+            height: 90px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 44px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero .tagline {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            margin-top: 8px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .hero .subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 16px;
+            font-weight: 300;
+        }
+
+        .wave-divider {
+            width: 100%;
+            height: 50px;
+            background: var(--beige);
+            position: relative;
+            margin-top: -1px;
+        }
+
+        .wave-divider::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: var(--beige);
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+
+        /* ===== SECTION COMMON ===== */
+        .section {
+            padding: 40px 36px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .section-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        /* ===== BOTTOM NAV OVERVIEW ===== */
+        .nav-overview {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            margin: 0 36px 20px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-around;
+            background: var(--beige);
+            border-radius: 16px;
+            padding: 12px 8px;
+            margin-bottom: 24px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-item .nav-emoji { font-size: 22px; }
+        .nav-item .nav-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .nav-item.active .nav-label { color: var(--lavender); }
+
+        .nav-desc {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ===== FEATURE CARDS ===== */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px 20px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover { transform: translateY(-2px); }
+
+        .feature-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .feature-card .card-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        /* ===== STEPS ===== */
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            background: white;
+            border-radius: 16px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .step-content p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* ===== BREATHING PATTERNS ===== */
+        .breathing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .breathing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+        }
+
+        .breathing-card .breathe-emoji {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .breathing-card h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .breathing-card .pattern {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--lavender);
+            margin-bottom: 4px;
+        }
+
+        .breathing-card p {
+            font-size: 11px;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        /* ===== CBT WIZARD ===== */
+        .wizard-steps {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .wizard-step {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 14px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .wizard-step .wz-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .wizard-step .wz-emoji { font-size: 24px; margin-bottom: 8px; }
+        .wizard-step h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+        .wizard-step p { font-size: 11px; color: var(--text-light); line-height: 1.4; }
+
+        /* ===== MOOD TRACKER ===== */
+        .mood-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .mood-emoji-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: white;
+            border-radius: 16px;
+            padding: 14px 12px;
+            width: 80px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+        }
+
+        .mood-emoji-card .emoji { font-size: 30px; }
+        .mood-emoji-card .label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== SOUNDS ===== */
+        .sounds-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .sound-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            border-radius: 40px;
+            padding: 10px 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sound-chip .s-emoji { font-size: 20px; }
+
+        /* ===== TIPS SECTION ===== */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .tip-card {
+            background: white;
+            border-radius: 20px;
+            padding: 22px 18px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+            border-left: 4px solid;
+        }
+
+        .tip-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-card p {
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ===== PREMIUM THEMES ===== */
+        .themes-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .theme-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 40px;
+            padding: 10px 18px;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
+
+        .theme-chip .lock { font-size: 14px; opacity: 0.8; }
+
+        /* ===== SETTINGS ===== */
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: white;
+            border-radius: 14px;
+            padding: 16px 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+        }
+
+        .setting-item .set-icon { font-size: 24px; }
+        .setting-item .set-text h4 { font-size: 14px; font-weight: 600; }
+        .setting-item .set-text p { font-size: 12px; color: var(--text-light); }
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-section {
+            background: white;
+            border-radius: 20px;
+            padding: 28px 24px;
+            margin: 0 36px 20px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+        }
+
+        .progress-bar-container {
+            background: var(--beige);
+            border-radius: 12px;
+            height: 20px;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 12px;
+            background: linear-gradient(90deg, var(--lavender), var(--sage));
+            width: 100%;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-surface) 100%);
+            padding: 48px 36px;
+            text-align: center;
+            color: white;
+            border-radius: 24px 24px 0 0;
+            margin-top: 20px;
+        }
+
+        .footer .heart { font-size: 40px; margin-bottom: 16px; }
+
+        .footer h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .footer p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .footer .version {
+            margin-top: 24px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--beige-dark), transparent);
+            margin: 0 36px;
+        }
+
+        /* ===== COLOR ACCENTS ===== */
+        .accent-lavender { background: var(--lavender); }
+        .accent-sage { background: var(--sage); }
+        .accent-beige { background: var(--beige); }
+        .border-lavender { border-color: var(--lavender); }
+        .border-sage { border-color: var(--sage); }
+        .border-mood-great { border-color: var(--mood-great); }
+        .border-mood-sad { border-color: var(--mood-sad); }
+
+        /* ===== AD BADGE ===== */
+        .ad-info {
+            background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
+            border-radius: 20px;
+            padding: 24px;
+            margin: 0 36px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .ad-info .ad-emoji { font-size: 36px; }
+        .ad-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .ad-info p { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+
+        /* ===== PRINT ===== */
+        @media print {
+            body { background: white; }
+            .infographic { max-width: 100%; }
+            .feature-card:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="infographic">
+
+    <!-- ====== HERO ====== -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">🧠</div>
+            <h1>HealMind</h1>
+            <div class="tagline">Your Daily Mental Wellness Companion</div>
+            <div class="subtitle">Panduan Lengkap Penggunaan Aplikasi</div>
+        </div>
+    </div>
+    <div class="wave-divider"></div>
+
+    <!-- ====== NAV OVERVIEW ====== -->
+    <div class="nav-overview">
+        <div class="section-header" style="margin-bottom:20px;">
+            <div class="section-icon accent-lavender">📱</div>
+            <div>
+                <div class="section-title">Navigasi Utama</div>
+                <div class="section-subtitle">5 tab untuk perjalanan wellness-mu</div>
+            </div>
+        </div>
+        <div class="nav-bar">
+            <div class="nav-item active">
+                <span class="nav-emoji">🏠</span>
+                <span class="nav-label">Home</span>
+            </div>
+            <div class="nav-item">
+                <span class="nav-emoji">📓</span>
+                <span class="nav-label">Journal</span>
+            </div>
+            <div class="nav-item">
+                <span class="nav-emoji">🌬️</span>
+                <span class="nav-label">Breathe</span>
+            </div>
+            <div class="nav-item">
+                <span class="nav-emoji">🧩</span>
+                <span class="nav-label">CBT</span>
+            </div>
+            <div class="nav-item">
+                <span class="nav-emoji">👤</span>
+                <span class="nav-label">Profile</span>
+            </div>
+        </div>
+        <p class="nav-desc">
+            Ketuk ikon di bawah untuk berpindah antar tab. Setiap tab memiliki fitur unik untuk mendukung kesehatan mentalmu sehari-hari.
+        </p>
+    </div>
+
+    <!-- ====== TAB 1: HOME ====== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon accent-lavender">🏠</div>
+            <div>
+                <div class="section-title">Tab Home — Beranda</div>
+                <div class="section-subtitle">Ringkasan harimu dalam satu layar</div>
+            </div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card full-width" style="background: linear-gradient(135deg, #EF5350 0%, #E53935 100%); color: white;">
+                <div class="card-icon">🆘</div>
+                <h3 style="color: white;">Tombol Panic Button</h3>
+                <p style="color: rgba(255,255,255,0.85);">
+                    Merasa panik atau cemas? Ketuk tombol ini untuk langsung memulai sesi pernapasan Deep Belly selama 1 menit. 
+                    Cepat, efektif, dan selalu tersedia di layar utama.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-icon">✨</div>
+                <h3>Kartu Afirmasi Harian</h3>
+                <p>Swipe kartu afirmasi untuk mendapatkan motivasi positif baru setiap hari. Geser ke kiri/kanan untuk melihat afirmasi berikutnya.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-icon">📊</div>
+                <h3>Grafik Mood Mingguan</h3>
+                <p>Lihat trend mood-mu selama 7 hari terakhir. Warna hijau = bahagia, kuning = biasa, biru = sedih.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-icon">🔔</div>
+                <h3>Pengingat Harian</h3>
+                <p>Notifikasi otomatis malam hari (jam 8-9 malam) mengingatmu untuk menulis jurnal dan check-in mood.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-icon">🏆</div>
+                <h3>Badge Streak</h3>
+                <p>Hadiah untuk konsistensimu! Semakin hari kamu check-in, semakin banyak badge yang terkumpul.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ====== TAB 2: JOURNAL ====== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon accent-sage">📓</div>
+            <div>
+                <div class="section-title">Tab Journal — Jurnal & Mood</div>
+                <div class="section-subtitle">Catat perasaanmu setiap hari</div>
+            </div>
+        </div>
+
+        <!-- Mood Check-in -->
+        <h3 style="font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+            <span>😊</span> Step 1: Pilih Mood-mu
+        </h3>
+        <div class="mood-row">
+            <div class="mood-emoji-card">
+                <span class="emoji">😊</span>
+                <span class="label">Great</span>
+            </div>
+            <div class="mood-emoji-card">
+                <span class="emoji">😐</span>
+                <span class="label">Okay</span>
+            </div>
+            <div class="mood-emoji-card">
+                <span class="emoji">😢</span>
+                <span class="label">Sad</span>
+            </div>
+            <div class="mood-emoji-card">
+                <span class="emoji">😤</span>
+                <span class="label">Angry</span>
+            </div>
+            <div class="mood-emoji-card">
+                <span class="emoji">😴</span>
+                <span class="label">Tired</span>
+            </div>
+        </div>
+
+        <p style="text-align:center; font-size:13px; color:var(--text-light); margin: 10px 0 24px;">
+            Ketuk emoji yang paling menggambarkan perasaanmu saat ini. Tidak perlu terlalu dipikirkan — jujur saja!
+        </p>
+
+        <!-- Steps -->
+        <h3 style="font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+            <span>✍️</span> Step 2: Tulis Jurnal
+        </h3>
+        <div class="steps-list">
+            <div class="step-item">
+                <div class="step-number accent-lavender">1</div>
+                <div class="step-content">
+                    <h4>Buka Tab Journal</h4>
+                    <p>Ketuk ikon "Journal" di navigasi bawah.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number accent-sage">2</div>
+                <div class="step-content">
+                    <h4>Ketuk Tombol "+"</h4>
+                    <p>Tombol tambah ada di pojok kanan bawah layar.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number accent-lavender">3</div>
+                <div class="step-content">
+                    <h4>Isi Detail Jurnal</h4>
+                    <p>Pilih mood, tulis judul, isi konten jurnal, dan tambahkan hal-hal yang kamu syukuri (gratitude list).</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number accent-sage">4</div>
+                <div class="step-content">
+                    <h4>Simpan & Lihat Riwayat</h4>
+                    <p>Jurnal tersimpan otomatis di perangkat. Buka kapan saja dari daftar jurnal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ====== TAB 3: BREATHE ====== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background: #E8F5E9;">🌬️</div>
+            <div>
+                <div class="section-title">Tab Breathe — Relaksasi</div>
+                <div class="section-subtitle">Tenangkan pikiran dengan pernapasan terarah</div>
+            </div>
+        </div>
+
+        <div class="breathing-grid">
+            <div class="breathing-card">
+                <div class="breathe-emoji">💤</div>
+                <h4>4-7-8</h4>
+                <div class="pattern">4 · 7 · 8</div>
+                <p>Tarik 4 detik · Tahan 7 detik · Hembus 8 detik. Cocok untuk insomnia & kecemasan.</p>
+            </div>
+            <div class="breathing-card">
+                <div class="breathe-emoji">📦</div>
+                <h4>Box Breathing</h4>
+                <div class="pattern">4 · 4 · 4 · 4</div>
+                <p>Sama rata 4 detik. Digunakan Navy SEAL untuk fokus & ketenangan di bawah tekanan.</p>
+            </div>
+            <div class="breathing-card">
+                <div class="breathe-emoji">🫁</div>
+                <h4>Deep Belly</h4>
+                <div class="pattern">4 · 2 · 6</div>
+                <p>Pernapasan dalam perut. Sempurna untuk sesi cepat dan panic button di home screen.</p>
+            </div>
+        </div>
+
+        <div style="margin-top:20px;">
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+                <span>⏱️</span> Pilih Durasi Sesi
+            </h3>
+            <div style="display:flex; gap:10px; justify-content:center; margin-bottom:20px;">
+                <div style="background:var(--lavender); color:white; padding:10px 22px; border-radius:30px; font-weight:700; font-size:14px;">1 min</div>
+                <div style="background:white; padding:10px 22px; border-radius:30px; font-weight:600; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">3 min</div>
+                <div style="background:white; padding:10px 22px; border-radius:30px; font-weight:600; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">5 min</div>
+                <div style="background:white; padding:10px 22px; border-radius:30px; font-weight:600; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">10 min</div>
+            </div>
+            <p style="text-align:center; font-size:13px; color:var(--text-light);">
+                Lingkaran bernafas akan mengembang dan mengempis sesuai pola. Ikuti ritmenya!
+            </p>
+        </div>
+
+        <div style="margin-top:24px;">
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+                <span>🎵</span> Suara Ketenangan
+            </h3>
+            <div class="sounds-row">
+                <div class="sound-chip"><span class="s-emoji">🌧️</span> Hujan</div>
+                <div class="sound-chip"><span class="s-emoji">🌊</span> Ombak</div>
+                <div class="sound-chip"><span class="s-emoji">🌲</span> Hutan</div>
+                <div class="sound-chip"><span class="s-emoji">〰️</span> White Noise</div>
+            </div>
+            <p style="text-align:center; font-size:12px; color:var(--text-light); margin-top:10px;">
+                Putar suara latar saat sesi pernapasan untuk pengalaman yang lebih mendalam.
+            </p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ====== TAB 4: CBT ====== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background: #EDE7F6;">🧩</div>
+            <div>
+                <div class="section-title">Tab CBT — Cognitive Behavioral Therapy</div>
+                <div class="section-subtitle">Ubah pola pikir negatif menjadi positif</div>
+            </div>
+        </div>
+
+        <h3 style="font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+            <span>🔄</span> Thought Catcher — 4 Step Reframe
+        </h3>
+
+        <div class="wizard-steps">
+            <div class="wizard-step">
+                <div class="wz-num accent-lavender">1</div>
+                <div class="wz-emoji">💭</div>
+                <h4>Pikiran</h4>
+                <p>Tulis pikiran negatif yang muncul</p>
+            </div>
+            <div class="wizard-step">
+                <div class="wz-num accent-sage">2</div>
+                <div class="wz-emoji">🔍</div>
+                <h4>Distorsi</h4>
+                <p>Identifikasi jenis distorsi kognitif</p>
+            </div>
+            <div class="wizard-step">
+                <div class="wz-num" style="background:#4CAF50;">3</div>
+                <div class="wz-emoji">🔄</div>
+                <h4>Reframe</h4>
+                <p>Ubah pikiran jadi lebih seimbang</p>
+            </div>
+            <div class="wizard-step">
+                <div class="wz-num" style="background:#FF9800;">4</div>
+                <div class="wz-emoji">💪</div>
+                <h4>Rasakan</h4>
+                <p>Rating intensitas sebelum & sesudah</p>
+            </div>
+        </div>
+
+        <div style="margin-top:24px;">
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+                <span>📋</span> 10 Jenis Distorsi Kognitif
+            </h3>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+                <div style="background:white; border-radius:12px; padding:12px 16px; font-size:13px; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+                    ⚫ <strong>All-or-Nothing</strong> — Semua atau tidak sama sekali
+                </div>
+                <div style="background:white; border-radius:12px; padding:12px 16px; font-size:13px; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+                    🔮 <strong>Overgeneralization</strong> — Selalu, tidak pernah
+                </div>
+                <div style="background:white; border-radius:12px; padding:12px 16px; font-size:13px; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+                    🧠 <strong>Mind Reading</strong> — Membaca pikiran orang lain
+                </div>
+                <div style="background:white; border-radius:12px; padding:12px 16px; font-size:13px; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+                    🔦 <strong>Magnification</strong> — Perbesar yang negatif
+                </div>
+                <div style="background:white; border-radius:12px; padding:12px 16px; font-size:13px; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+                    🏷️ <strong>Labeling</strong> — Menempelkan label pada diri
+                </div>
+                <div style="background:white; border-radius:12px; padding:12px 16px; font-size:13px; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+                    👻 <strong>Fortune Telling</strong> — Menebak hasil buruk
+                </div>
+                <div style="background:white; border-radius:12px; padding:12px 16px; font-size:13px; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+                    ⚖️ <strong>Emotional Reasoning</strong> — "Aku merasa, jadi pasti"
+                </div>
+                <div style="background:white; border-radius:12px; padding:12px 16px; font-size:13px; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+                    🚫 <strong>Should Statements</strong> — Harusnya begini, harusnya begitu
+                </div>
+                <div style="background:white; border-radius:12px; padding:12px 16px; font-size:13px; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+                    😔 <strong>Personalization</strong> — Selalu menyalahkan diri
+                </div>
+                <div style="background:white; border-radius:12px; padding:12px 16px; font-size:13px; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+                    👎 <strong>Mental Filtering</strong> — Fokus pada yang negatif saja
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:24px;">
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+                <span>💡</span> Tip CBT Harian
+            </h3>
+            <div style="background: linear-gradient(135deg, #E8F5E9, #F1F8E9); border-radius:16px; padding:20px; display:flex; gap:14px; align-items:flex-start;">
+                <span style="font-size:28px;">💡</span>
+                <div>
+                    <p style="font-size:14px; font-weight:600; margin-bottom:4px;">Did you know?</p>
+                    <p style="font-size:13px; color:var(--text-light); line-height:1.6;">
+                        Aplikasi memiliki 35+ tips CBT harian yang berputar setiap hari. Buka tab CBT untuk melihat tips hari ini dan pelajari cara mengenali distorsi kognitif dalam kehidupan sehari-hari.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ====== TAB 5: PROFILE ====== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background: #E3F2FD;">👤</div>
+            <div>
+                <div class="section-title">Tab Profile — Pengaturan & Analitik</div>
+                <div class="section-subtitle">Personalisasi & pantau progresmu</div>
+            </div>
+        </div>
+
+        <div class="settings-list">
+            <div class="setting-item">
+                <span class="set-icon">📊</span>
+                <div class="set-text">
+                    <h4>Analitik Mood Lanjutan</h4>
+                    <p>Pie chart, tren harian, insight berdasarkan hari dalam minggu</p>
+                </div>
+            </div>
+            <div class="setting-item">
+                <span class="set-icon">📄</span>
+                <div class="set-text">
+                    <h4>Export Jurnal ke PDF</h4>
+                    <p>Bagikan atau simpan jurnal dalam format PDF</p>
+                </div>
+            </div>
+            <div class="setting-item">
+                <span class="set-icon">🌐</span>
+                <div class="set-text">
+                    <h4>Bahasa / Language</h4>
+                    <p>Pilih English atau Bahasa Indonesia</p>
+                </div>
+            </div>
+            <div class="setting-item">
+                <span class="set-icon">🔔</span>
+                <div class="set-text">
+                    <h4>Pengingat Notifikasi</h4>
+                    <p>Atur waktu pengingat harian sesuai kebiasaanmu</p>
+                </div>
+            </div>
+            <div class="setting-item">
+                <span class="set-icon">🎨</span>
+                <div class="set-text">
+                    <h4>Theme / Tema</h4>
+                    <p>Default Lavender atau buka tema premium dengan rewarded ad</p>
+                </div>
+            </div>
+            <div class="setting-item">
+                <span class="set-icon">🌙</span>
+                <div class="set-text">
+                    <h4>Dark Mode</h4>
+                    <p>Nyaman untuk malam hari, mengurangi ketegangan mata</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Themes -->
+        <div style="margin-top:24px;">
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+                <span>💎</span> Tema Premium (Gratis via Rewarded Ad)
+            </h3>
+            <div class="themes-row">
+                <div class="theme-chip" style="background: linear-gradient(135deg, #1565C0, #42A5F5);">🌊 Ocean <span class="lock">🎁</span></div>
+                <div class="theme-chip" style="background: linear-gradient(135deg, #E65100, #FF9800);">🌅 Sunset <span class="lock">🎁</span></div>
+                <div class="theme-chip" style="background: linear-gradient(135deg, #2E7D32, #66BB6A);">🌲 Forest <span class="lock">🎁</span></div>
+                <div class="theme-chip" style="background: linear-gradient(135deg, #AD1457, #EC407A);">🌹 Rose <span class="lock">🎁</span></div>
+                <div class="theme-chip" style="background: linear-gradient(135deg, #1A237E, #3949AB);">🌙 Midnight <span class="lock">🎁</span></div>
+            </div>
+            <p style="text-align:center; font-size:12px; color:var(--text-light); margin-top:10px;">
+                Tonton video singkat (rewarded ad) untuk membuka tema selama 24 jam. Gratis, tanpa belanja!
+            </p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ====== AD INFO ====== -->
+    <div class="ad-info">
+        <span class="ad-emoji">📢</span>
+        <div>
+            <h4>Tentang Iklan di HealMind</h4>
+            <p>HealMind gratis karena didukung iklan (AdMob). Iklan banner muncul di bagian bawah layar, dan interstitial sesekali setelah beberapa aktivitas. Ingin bebas iklan? Tonton rewarded ad untuk remove ads 24 jam!</p>
+        </div>
+    </div>
+
+    <!-- ====== DAILY ROUTINE ====== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background: #FFF3E0;">🌅</div>
+            <div>
+                <div class="section-title">Rutinitas Harian yang Disarankan</div>
+                <div class="section-subtitle">Bangun kebiasaan positif bersama HealMind</div>
+            </div>
+        </div>
+
+        <div class="steps-list">
+            <div class="step-item">
+                <div class="step-number" style="background: linear-gradient(135deg, #FF9800, #FFB74D);">☀️</div>
+                <div class="step-content">
+                    <h4>Pagi — Baca Afirmasi</h4>
+                    <p>Buka aplikasi, baca kartu afirmasi harian di Home screen. Mulai hari dengan pikiran positif.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number" style="background: linear-gradient(135deg, #4CAF50, #81C784);">🌿</div>
+                <div class="step-content">
+                    <h4>Siang — Jurnal Singkat</h4>
+                    <p>Luangkan 5 menit untuk check-in mood dan tulis apa yang kamu syukuri hari ini.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number" style="background: linear-gradient(135deg, var(--lavender), var(--lavender-light));">🌬️</div>
+                <div class="step-content">
+                    <h4>Sore — Sesi Relaksasi</h4>
+                    <p>Lakukan 3-5 menit pernapasan terarah. Pilih pola 4-7-8 atau Box Breathing.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number" style="background: linear-gradient(135deg, #5C6BC0, #9FA8DA);">🌙</div>
+                <div class="step-content">
+                    <h4>Malam — Refleksi & Jurnal</h4>
+                    <p>Tulis jurnal lengkap. Jika ada pikiran negatif, gunakan CBT Thought Catcher untuk reframing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ====== PROGRESS TRACKER ====== -->
+    <div class="progress-section">
+        <div class="section-header" style="margin-bottom:12px;">
+            <div class="section-icon accent-sage">📈</div>
+            <div>
+                <div class="section-title">Pantau Progresmu</div>
+                <div class="section-subtitle">Konsistensi adalah kunci</div>
+            </div>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="progress-labels">
+            <span>🌅 Mulai</span>
+            <span>7 hari streak</span>
+            <span>30 hari 🏆</span>
+        </div>
+        <p style="font-size:13px; color:var(--text-light); margin-top:14px; text-align:center; line-height:1.6;">
+            Semakin rutin kamu check-in, semakin akurat data analitikmu. Target: minimal 1x sehari selama 7 hari untuk mulai melihat pola!
+        </p>
+    </div>
+
+    <!-- ====== TIPS ====== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background: #FCE4EC;">💡</div>
+            <div>
+                <div class="section-title">Tips & Trik</div>
+                <div class="section-subtitle">Maximalkan pengalaman HealMind-mu</div>
+            </div>
+        </div>
+
+        <div class="tips-grid">
+            <div class="tip-card border-lavender">
+                <h4>✍️ Jurnal = Konsistensi</h4>
+                <p>Tidak perlu panjang! 1-2 kalimat sudah cukup. Yang penting rutin, bukan sempurna.</p>
+            </div>
+            <div class="tip-card border-sage">
+                <h4>🌬️ Panic = Breath First</h4>
+                <p>Saat cemas, langsung ketuk tombol panic di Home. 1 menit Deep Belly bisa menurunkan detak jantung.</p>
+            </div>
+            <div class="tip-card border-mood-great">
+                <h4>🧠 CBT = Practice</h4>
+                <p>Semakin sering memakai Thought Catcher, semakin terbiasa mengenali distorsi kognitif.</p>
+            </div>
+            <div class="tip-card border-mood-sad">
+                <h4>🌙 Dark Mode = Tidur</h4>
+                <p>Aktifkan dark mode di malam hari sebelum tidur. Kurangi paparan cahaya biru.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== FOOTER ====== -->
+    <div class="footer">
+        <div class="heart">💜</div>
+        <h2>Kesehatan Mentalmu Penting</h2>
+        <p>
+            HealMind hadir untuk menemani langkah kecilmu setiap hari. 
+            Kamu tidak sendirian. Setiap langkah kecil adalah kemajuan.
+        </p>
+        <div class="version">
+            HealMind v1.0 • Made with 💜 for your wellness
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
