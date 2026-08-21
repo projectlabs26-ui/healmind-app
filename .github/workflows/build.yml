@@ -3,7 +3,7 @@ name: Build APK
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
     inputs:
       build_type:
         description: 'Build type'
@@ -39,14 +39,14 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
-      # ============================
+      # =====================
       # DEBUG BUILD
-      # ============================
+      # =====================
       - name: Build APK (Debug)
         if: ${{ github.event.inputs.build_type == 'debug' || github.event_name == 'push' }}
         run: flutter build apk --debug
 
-      - name: Upload Debug APK Artifact
+      - name: Upload Debug APK
         if: ${{ github.event.inputs.build_type == 'debug' || github.event_name == 'push' }}
         uses: actions/upload-artifact@v4
         with:
@@ -54,14 +54,15 @@ jobs:
           path: build/app/outputs/flutter-apk/app-debug.apk
           retention-days: 7
 
-      # ============================
+      # =====================
       # RELEASE BUILD
-      # ============================
+      # =====================
       - name: Decode keystore
         if: ${{ github.event.inputs.build_type == 'release' }}
         run: |
           mkdir -p android/app
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/keystore.jks
+          echo "Keystore size: $(wc -c < android/app/keystore.jks) bytes"
 
       - name: Build APK (Release)
         if: ${{ github.event.inputs.build_type == 'release' }}
@@ -72,10 +73,12 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEY_ALIAS: healmind
 
-      - name: Upload Release APK Artifact
+      - name: Upload Release APK
         if: ${{ github.event.inputs.build_type == 'release' }}
         uses: actions/upload-artifact@v4
         with:
           name: healmind-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: |
+            build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/flutter-apk/app-release.apk.sha1
           retention-days: 30
