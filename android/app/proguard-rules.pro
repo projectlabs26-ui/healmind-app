@@ -19,3 +19,6 @@
 
 # Keep AdMob
 -keep class com.google.android.gms.internal.ads.** { *; }
+
+# Ignore missing Play Core classes (not used by this app)
+-dontwarn com.google.android.play.core.**
