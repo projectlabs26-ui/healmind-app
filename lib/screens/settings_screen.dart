@@ -439,10 +439,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              'When personalized ads are disabled:
+              '''When personalized ads are disabled:
 • Google AdMob shows generic/contextual ads
 • Your advertising ID is not used for targeting
-• Your device info is not used for ad personalization',
+• Your device info is not used for ad personalization''',
               style: TextStyle(fontSize: 13, height: 1.6, color: Colors.grey.shade600),
             ),
             const SizedBox(height: 12),
