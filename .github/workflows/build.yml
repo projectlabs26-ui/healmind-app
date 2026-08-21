@@ -3,7 +3,7 @@ name: Build APK
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: # Manual trigger
+  workflow_dispatch:  # Manual trigger
     inputs:
       build_type:
         description: 'Build type'
@@ -37,9 +37,9 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
-      # ====================
+      # ============================
       # DEBUG BUILD
-      # ====================
+      # ============================
       - name: Build APK (Debug)
         if: ${{ github.event.inputs.build_type == 'debug' || github.event_name == 'push' }}
         run: flutter build apk --debug
@@ -52,12 +52,14 @@ jobs:
           path: build/app/outputs/flutter-apk/app-debug.apk
           retention-days: 7
 
-      # ====================
+      # ============================
       # RELEASE BUILD
-      # ====================
+      # ============================
       - name: Decode keystore
         if: ${{ github.event.inputs.build_type == 'release' }}
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > app/keystore.jks
+        run: |
+          mkdir -p android/app
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/keystore.jks
 
       - name: Build APK (Release)
         if: ${{ github.event.inputs.build_type == 'release' }}
