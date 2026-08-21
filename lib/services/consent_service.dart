@@ -53,7 +53,9 @@ class ConsentService {
     try {
       ConsentInformation.instance.requestConsentInfoUpdate(
         params,
-        (ConsentStatus status) async {
+        () async {
+          // Consent info updated — check status
+          final status = await ConsentInformation.instance.getConsentStatus();
           if (status == ConsentStatus.required) {
             _saveConsentStatus(false);
             if (!completer.isCompleted) completer.complete(false);
