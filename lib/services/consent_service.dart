@@ -52,32 +52,26 @@ class ConsentService {
 
     try {
       ConsentInformation.instance.requestConsentInfoUpdate(
-        params: params,
-        onConsentInfoUpdated: (ConsentStatus status) async {
+        params,
+        (ConsentStatus status) async {
           if (status == ConsentStatus.required) {
-            // EEA/UK user — consent form needs to be shown
-            // The form is shown automatically by UMP SDK
             _saveConsentStatus(false);
             if (!completer.isCompleted) completer.complete(false);
           } else if (status == ConsentStatus.obtained) {
-            // Consent already obtained
             _saveConsentStatus(true);
             _applyRequestConfiguration();
             if (!completer.isCompleted) completer.complete(true);
           } else if (status == ConsentStatus.notRequired) {
-            // Non-EEA user — no consent needed
             _saveConsentStatus(true);
             _applyRequestConfiguration();
             if (!completer.isCompleted) completer.complete(true);
           } else {
-            // Unknown status
             _saveConsentStatus(true);
             _applyRequestConfiguration();
             if (!completer.isCompleted) completer.complete(true);
           }
         },
-        formError: (DartError error) {
-          // Error fetching consent info — assume consent not required
+        (FormError error) {
           debugPrint('Consent error: ${error.message}');
           _saveConsentStatus(true);
           _applyRequestConfiguration();
