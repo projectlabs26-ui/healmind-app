@@ -4,7 +4,6 @@ import '../constants/cbt_data.dart';
 import '../models/cbt_entry.dart';
 import '../services/hive_service.dart';
 import '../widgets/cbt_tip_card.dart';
-import '../widgets/ad_banner_widget.dart';
 import 'cbt_reframe_screen.dart';
 
 class CBTScreen extends StatefulWidget {
@@ -176,7 +175,6 @@ class _CBTScreenState extends State<CBTScreen> {
           ],
         ],
       ),
-      bottomNavigationBar: const AdBannerWidget(),
     );
   }
 

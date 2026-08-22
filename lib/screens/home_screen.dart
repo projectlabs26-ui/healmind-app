@@ -6,7 +6,6 @@ import '../models/mood_entry.dart';
 import '../services/hive_service.dart';
 import '../widgets/affirmation_card.dart';
 import '../widgets/streak_badge.dart';
-import '../widgets/ad_banner_widget.dart';
 import 'mood_check_screen.dart';
 import 'journal_screen.dart';
 import 'mood_chart_screen.dart';
@@ -236,7 +235,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const AdBannerWidget(),
     );
   }
 

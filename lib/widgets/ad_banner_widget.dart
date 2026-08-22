@@ -21,8 +21,12 @@ class _AdBannerWidgetState extends State<AdBannerWidget> {
   }
 
   void _createBanner() {
-    if (AdMobService.isAdsFree) return;
+    if (AdMobService.isAdsFree) {
+      debugPrint('[AdBanner] Ads-free mode active, skipping banner load');
+      return;
+    }
 
+    debugPrint('[AdBanner] Loading banner ad...');
     _bannerAd?.dispose();
     _bannerAd = BannerAd(
       adUnitId: AdMobService.bannerAdId,
@@ -30,9 +34,11 @@ class _AdBannerWidgetState extends State<AdBannerWidget> {
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (ad) {
+          debugPrint('[AdBanner] ✅ Banner loaded successfully');
           if (mounted) setState(() => _isLoaded = true);
         },
         onAdFailedToLoad: (ad, error) {
+          debugPrint('[AdBanner] ❌ Failed to load: ${error.message} (code: ${error.code})');
           ad.dispose();
           // Retry after 30 seconds
           Future.delayed(const Duration(seconds: 30), () {

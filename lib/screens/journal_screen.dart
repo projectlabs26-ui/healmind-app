@@ -2,7 +2,6 @@ import '../services/locale_service.dart';
 import 'package:flutter/material.dart';
 import '../models/journal_entry.dart';
 import '../services/hive_service.dart';
-import '../widgets/ad_banner_widget.dart';
 import '../widgets/ad_native_widget.dart';
 import 'journal_detail_screen.dart';
 
@@ -54,7 +53,6 @@ class _JournalScreenState extends State<JournalScreen> {
         icon: const Icon(Icons.edit),
         label: Text(L10n.get('newEntry')),
       ),
-      bottomNavigationBar: const AdBannerWidget(),
     );
   }
 

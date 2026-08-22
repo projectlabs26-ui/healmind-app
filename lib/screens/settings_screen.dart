@@ -9,7 +9,6 @@ import '../services/notification_service.dart';
 import '../services/admob_service.dart';
 import '../services/consent_service.dart';
 import '../services/pdf_export_service.dart';
-import '../widgets/ad_banner_widget.dart';
 import 'privacy_policy_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -417,7 +416,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: const AdBannerWidget(),
     );
   }
 

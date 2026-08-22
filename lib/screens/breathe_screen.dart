@@ -5,7 +5,6 @@ import '../models/breathing_session.dart';
 import '../services/hive_service.dart';
 import '../widgets/breathing_pattern_selector.dart';
 import '../widgets/session_timer_picker.dart';
-import '../widgets/ad_banner_widget.dart';
 import 'breathing_session_screen.dart';
 import 'calm_sounds_screen.dart';
 
@@ -238,7 +237,6 @@ class _BreatheScreenState extends State<BreatheScreen> {
           ],
         ],
       ),
-      bottomNavigationBar: const AdBannerWidget(),
     );
   }
 

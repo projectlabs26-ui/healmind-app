@@ -22,8 +22,12 @@ class _AdNativeWidgetState extends State<AdNativeWidget> {
   }
 
   void _loadNative() {
-    if (AdMobService.isAdsFree) return;
+    if (AdMobService.isAdsFree) {
+      debugPrint('[AdNative] Ads-free mode active, skipping native load');
+      return;
+    }
 
+    debugPrint('[AdNative] Loading native ad...');
     _nativeAd?.dispose();
     _nativeAd = NativeAd(
       adUnitId: AdMobService.nativeAdId,
@@ -34,11 +38,17 @@ class _AdNativeWidgetState extends State<AdNativeWidget> {
       request: const AdRequest(),
       listener: NativeAdListener(
         onAdLoaded: (ad) {
+          debugPrint('[AdNative] ✅ Native ad loaded successfully');
           if (mounted) setState(() => _isLoaded = true);
         },
         onAdFailedToLoad: (ad, error) {
+          debugPrint('[AdNative] ❌ Failed to load: ${error.message} (code: ${error.code})');
           ad.dispose();
           if (mounted) setState(() => _isLoaded = false);
+          // Retry after 30 seconds
+          Future.delayed(const Duration(seconds: 30), () {
+            if (mounted) _loadNative();
+          });
         },
       ),
     );

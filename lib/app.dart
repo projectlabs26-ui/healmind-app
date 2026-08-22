@@ -11,6 +11,7 @@ import 'screens/breathe_screen.dart';
 import 'screens/cbt_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/onboarding_screen.dart';
+import 'widgets/ad_banner_widget.dart';
 
 class HealMindApp extends StatefulWidget {
   const HealMindApp({super.key});
@@ -207,9 +208,16 @@ class _MainShell extends StatelessWidget {
     ];
 
     return Scaffold(
-      body: IndexedStack(
-        index: currentIndex,
-        children: screens,
+      body: Column(
+        children: [
+          Expanded(
+            child: IndexedStack(
+              index: currentIndex,
+              children: screens,
+            ),
+          ),
+          const AdBannerWidget(),
+        ],
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentIndex,
